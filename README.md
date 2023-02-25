@@ -3,7 +3,7 @@
 
 ## Description
 
-Github Stats API.
+GitHub Stats API.
 
 ## Tech Stack
 
