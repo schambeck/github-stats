@@ -25,8 +25,8 @@ public class ConcurrentStatsLoader {
     private final ContributorMapper contributorMapper;
 
     public StatsWeb execute(String username, String repository) {
-        CompletableFuture<List<IssueDto>> issueFuture = issueWebClient.findAll(username, repository);
-        CompletableFuture<List<ContributorDto>> contributorFuture = contributorWebClient.findAll(username, repository);
+        CompletableFuture<List<IssueDto>> issueFuture = CompletableFuture.supplyAsync(() -> issueWebClient.findAll(username, repository));
+        CompletableFuture<List<ContributorDto>> contributorFuture = CompletableFuture.supplyAsync(() -> contributorWebClient.findAll(username, repository));
         CompletableFuture.allOf(issueFuture, contributorFuture).join();
         try {
             return createStats(username, repository, issueFuture.get(), contributorFuture.get());

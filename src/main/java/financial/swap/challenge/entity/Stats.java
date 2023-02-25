@@ -28,6 +28,10 @@ public class Stats {
     @OneToMany(mappedBy = "stats", cascade = ALL, orphanRemoval = true)
     private List<Contributor> contributors;
 
+    public Stats(Long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

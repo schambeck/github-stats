@@ -13,6 +13,7 @@ GitHub Stats API.
 - Quartz
 - PostgreSQL, Flyway
 - Swagger
+- JUnit 5, Mockito, JaCoCo
 
 ## Project Setup
 
