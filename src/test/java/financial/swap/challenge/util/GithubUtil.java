@@ -7,6 +7,7 @@ import financial.swap.challenge.client.github.dto.UserDto;
 import financial.swap.challenge.entity.Contributor;
 import financial.swap.challenge.entity.Issue;
 import financial.swap.challenge.entity.Stats;
+import financial.swap.challenge.rabbit.msg.StatsMsg;
 import financial.swap.challenge.web.ContributorWeb;
 import financial.swap.challenge.web.IssueWeb;
 import financial.swap.challenge.web.StatsWeb;
@@ -89,6 +90,13 @@ public final class GithubUtil {
                 .labels(List.of(LabelDto.builder()
                         .name("bug")
                         .build()))
+                .build();
+    }
+
+    public static StatsMsg createStatsMsg() {
+        return StatsMsg.builder()
+                .username("schambeck")
+                .repository("api-github")
                 .build();
     }
 }
