@@ -10,6 +10,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class StatsWeb implements Serializable {
     private Long id;
     private String user;

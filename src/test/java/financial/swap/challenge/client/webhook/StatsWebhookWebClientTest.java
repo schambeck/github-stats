@@ -1,8 +1,7 @@
-package financial.swap.challenge.client.github;
+package financial.swap.challenge.client.webhook;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import financial.swap.challenge.client.github.dto.ContributorDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
@@ -11,20 +10,17 @@ import org.springframework.retry.RetryCallback;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
-import java.util.List;
-
-import static financial.swap.challenge.client.github.GithubUtil.createContributorDto;
-import static org.assertj.core.api.Assertions.assertThat;
+import static financial.swap.challenge.client.github.GithubUtil.createStatsWeb;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-@RestClientTest(ContributorWebClient.class)
-class ContributorWebClientTest {
+@RestClientTest(StatsWebhookWebClient.class)
+class StatsWebhookWebClientTest {
     @Autowired
-    private ContributorWebClient client;
+    private StatsWebhookWebClient client;
 
     @MockBean
     private RetryTemplate retryTemplate;
@@ -36,15 +32,15 @@ class ContributorWebClientTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void findAll() throws JsonProcessingException {
-        String contributorsJson = objectMapper.writeValueAsString(List.of(createContributorDto()));
-        server.expect(requestTo("/schambeck/api-github/contributors"))
-                .andRespond(withSuccess(contributorsJson, APPLICATION_JSON));
+    void post() throws JsonProcessingException {
+        String statsJson = objectMapper.writeValueAsString(createStatsWeb());
+        server.expect(requestTo("/afd6052e-5ef8-4a0a-b82f-d54ae4ed9a7b"))
+                .andExpect(method(POST))
+                .andExpect(content().json(statsJson))
+                .andRespond(withSuccess());
         when(retryTemplate.execute(any(), any(), any()))
                 .thenAnswer(invocation -> invocation.<RetryCallback<?, ?>>getArgument(0).doWithRetry(null));
 
-        List<ContributorDto> contributors = client.findAll("schambeck", "api-github");
-
-        assertThat(contributors).hasSameElementsAs(List.of(createContributorDto()));
+        client.post(createStatsWeb());
     }
 }

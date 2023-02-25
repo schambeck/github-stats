@@ -9,7 +9,9 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class ContributorWeb implements Serializable {
+    private Long id;
     private String name;
     private String user;
     private Long qtyCommits;

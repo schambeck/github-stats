@@ -18,6 +18,7 @@ public class ContributorMapper {
 
     public ContributorWeb toWeb(Contributor contributor) {
         return ContributorWeb.builder()
+                .id(contributor.getId())
                 .name(contributor.getName())
                 .user(contributor.getUser())
                 .qtyCommits(contributor.getQtyCommits())
@@ -26,6 +27,7 @@ public class ContributorMapper {
 
     public Contributor toEntity(ContributorWeb contributor, Stats stats) {
         return Contributor.builder()
+                .id(contributor.getId())
                 .stats(stats)
                 .name(contributor.getName())
                 .user(contributor.getUser())

@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 import static financial.swap.challenge.client.github.GithubUtil.*;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -41,7 +41,10 @@ class ConcurrentStatsLoaderTest {
 
         StatsWeb stats = loader.execute("schambeck", "api-github");
 
+        assertThat(stats.getId()).isNull();
         assertThat(stats.getUser()).isEqualTo("schambeck");
         assertThat(stats.getRepository()).isEqualTo("api-github");
+        assertThat(stats.getIssues()).hasSameElementsAs(List.of(createIssueWeb()));
+        assertThat(stats.getContributors()).hasSameElementsAs(List.of(createContributorWeb()));
     }
 }

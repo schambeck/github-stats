@@ -23,6 +23,7 @@ public class IssueMapper {
 
     public IssueWeb toWeb(Issue issue) {
         return IssueWeb.builder()
+                .id(issue.getId())
                 .title(issue.getTitle())
                 .author(issue.getAuthor())
                 .labels(issue.getLabels())
@@ -31,6 +32,7 @@ public class IssueMapper {
 
     public Issue toEntity(IssueWeb issue, Stats stats) {
         return Issue.builder()
+                .id(issue.getId())
                 .stats(stats)
                 .title(issue.getTitle())
                 .author(issue.getAuthor())

@@ -1,8 +1,8 @@
 package financial.swap.challenge.client.webhook;
 
 import financial.swap.challenge.web.StatsWeb;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,16 @@ import org.springframework.web.client.RestTemplate;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Component
-@RequiredArgsConstructor
 public class StatsWebhookWebClient {
     @Value("${custom.webhook-site.endpoint-id}")
     private String endpointId;
     private final RestTemplate restTemplateWebhook;
     private final RetryTemplate retryTemplate;
+
+    public StatsWebhookWebClient(RestTemplateBuilder restTemplateBuilderWebhook, RetryTemplate retryTemplate) {
+        this.restTemplateWebhook = restTemplateBuilderWebhook.build();
+        this.retryTemplate = retryTemplate;
+    }
 
     public void post(StatsWeb stats) {
         retryTemplate.execute(context -> doPost(stats));

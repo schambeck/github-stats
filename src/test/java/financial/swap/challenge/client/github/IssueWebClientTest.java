@@ -14,7 +14,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import java.util.List;
 
 import static financial.swap.challenge.client.github.GithubUtil.createIssueDto;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -45,6 +45,6 @@ class IssueWebClientTest {
 
         List<IssueDto> issues = client.findAll("schambeck", "api-github");
 
-        assertThat(createIssueDto()).isIn(issues);
+        assertThat(issues).hasSameElementsAs(List.of(createIssueDto()));
     }
 }

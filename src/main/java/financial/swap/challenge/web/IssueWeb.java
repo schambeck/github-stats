@@ -10,7 +10,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class IssueWeb implements Serializable {
+    private Long id;
     private String title;
     private String author;
     private List<String> labels;
