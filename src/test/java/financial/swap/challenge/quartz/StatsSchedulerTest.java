@@ -15,6 +15,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import static financial.swap.challenge.util.GithubUtil.createStatsWeb;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -34,6 +36,8 @@ class StatsSchedulerTest {
         when(scheduler.scheduleJob(job, trigger)).thenReturn(createStartAt());
 
         statsScheduler.execute(createStatsWeb());
+
+        verify(scheduler).scheduleJob(any(JobDetail.class), any(Trigger.class));
     }
 
     private static JobDetail createJobDetail(StatsWeb stats) {

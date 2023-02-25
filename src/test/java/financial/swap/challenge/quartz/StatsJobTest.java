@@ -16,8 +16,7 @@ import java.util.Optional;
 
 import static financial.swap.challenge.util.GithubUtil.createStats;
 import static financial.swap.challenge.util.GithubUtil.createStatsWeb;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 class StatsJobTest {
@@ -42,5 +41,9 @@ class StatsJobTest {
         detail.getJobDataMap().put("statsId", 1L);
         when(context.getJobDetail()).thenReturn(detail);
         job.execute(context);
+
+        verify(repository).findById(1L);
+        verify(mapper).toWeb(createStats());
+        verify(webhookClient).post(createStatsWeb());
     }
 }
