@@ -4,7 +4,7 @@ import financial.swap.challenge.entity.Contributor;
 import financial.swap.challenge.web.ContributorWeb;
 import org.junit.jupiter.api.Test;
 
-import static financial.swap.challenge.client.github.GithubUtil.*;
+import static financial.swap.challenge.util.GithubUtil.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class ContributorMapperTest {

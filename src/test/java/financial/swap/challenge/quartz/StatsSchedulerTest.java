@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
-import static financial.swap.challenge.client.github.GithubUtil.createStatsWeb;
+import static financial.swap.challenge.util.GithubUtil.createStatsWeb;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)

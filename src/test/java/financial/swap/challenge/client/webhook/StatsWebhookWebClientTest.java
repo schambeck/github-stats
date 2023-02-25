@@ -10,7 +10,7 @@ import org.springframework.retry.RetryCallback;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.test.web.client.MockRestServiceServer;
 
-import static financial.swap.challenge.client.github.GithubUtil.createStatsWeb;
+import static financial.swap.challenge.util.GithubUtil.createStatsWeb;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpMethod.POST;

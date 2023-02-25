@@ -1,4 +1,4 @@
-package financial.swap.challenge.client.github;
+package financial.swap.challenge.util;
 
 import financial.swap.challenge.client.github.dto.ContributorDto;
 import financial.swap.challenge.client.github.dto.IssueDto;

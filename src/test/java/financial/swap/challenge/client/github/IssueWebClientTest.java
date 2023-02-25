@@ -13,7 +13,7 @@ import org.springframework.test.web.client.MockRestServiceServer;
 
 import java.util.List;
 
-import static financial.swap.challenge.client.github.GithubUtil.createIssueDto;
+import static financial.swap.challenge.util.GithubUtil.createIssueDto;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;

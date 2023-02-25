@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static financial.swap.challenge.client.github.GithubUtil.*;
+import static financial.swap.challenge.util.GithubUtil.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StatsMapperTest {

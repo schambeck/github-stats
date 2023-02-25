@@ -14,8 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static financial.swap.challenge.client.github.GithubUtil.createStats;
-import static financial.swap.challenge.client.github.GithubUtil.createStatsWeb;
+import static financial.swap.challenge.util.GithubUtil.createStats;
+import static financial.swap.challenge.util.GithubUtil.createStatsWeb;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
