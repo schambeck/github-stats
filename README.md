@@ -17,6 +17,14 @@ GitHub Stats API.
 
 ## Project Setup
 
+### Starting infra (PostgreSQL and RabbitMQ)
+
+```bash
+$ docker-compose up -d
+```
+
+### Building project
+
 ```bash
 $ ./gradlew clean build
 ```
@@ -24,14 +32,41 @@ $ ./gradlew clean build
 ### Running the app locally
 
 ```bash
-# PostgreSQL and RabbitMQ
-$ docker-compose up -d
-
-# Starting up
 $ java -jar build/libs/github-stats-1.0.0.jar
 ```
 
+### Generate GitHub Stats
+
+    curl -X POST http://localhost:8080/stats
+
+### Webhook Site
+
+    https://webhook.site/afd6052e-5ef8-4a0a-b82f-d54ae4ed9a7b
+
+## Tests
+
+### Running unit tests
+
+```bash
+$ ./gradlew clean test testCodeCoverageReport
+```
+
+### Unit report
+
+    build/reports/tests/test/index.html
+
+### Coverage report
+
+    build/reports/jacoco/testCodeCoverageReport/html/index.html
+
 ## Stay in touch
 
-- Swagger UI - http://localhost:8080
-- Stats API - http://localhost:8080/stats
+### Swagger
+
+    http://localhost:8080
+
+### RabbitMQ Web Interface
+
+    URL : http://localhost:15672
+    User: guest
+    Pass: guest
