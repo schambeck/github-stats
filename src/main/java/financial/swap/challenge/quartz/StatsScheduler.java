@@ -1,6 +1,5 @@
 package financial.swap.challenge.quartz;
 
-import financial.swap.challenge.web.StatsWeb;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -19,10 +18,10 @@ public class StatsScheduler {
     private Integer daysAfter;
     private final Scheduler scheduler;
 
-    public void execute(StatsWeb stats) {
+    public void execute(Long statsId) {
         try {
-            log.debug("Scheduling job {}", stats.getId());
-            JobDetail job = createJobDetail(stats);
+            log.debug("Scheduling job {}", statsId);
+            JobDetail job = createJobDetail(statsId);
             Trigger trigger = createTrigger();
             scheduler.scheduleJob(job, trigger);
         } catch (SchedulerException e) {
@@ -30,12 +29,10 @@ public class StatsScheduler {
         }
     }
 
-    private static JobDetail createJobDetail(StatsWeb stats) {
-        JobDataMap params = new JobDataMap();
-        params.put("statsId", stats.getId());
+    private static JobDetail createJobDetail(Long statsId) {
         return JobBuilder.newJob()
                 .ofType(StatsJob.class)
-                .usingJobData(params)
+                .usingJobData(createParams(statsId))
                 .build();
     }
 
@@ -50,5 +47,11 @@ public class StatsScheduler {
                 .plusDays(daysAfter)
                 .atZone(ZoneId.systemDefault())
                 .toInstant());
+    }
+
+    private static JobDataMap createParams(Long statsId) {
+        JobDataMap params = new JobDataMap();
+        params.put("statsId", statsId);
+        return params;
     }
 }

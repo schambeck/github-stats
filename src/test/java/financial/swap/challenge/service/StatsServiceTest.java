@@ -33,14 +33,13 @@ class StatsServiceTest {
         when(mapper.toEntity(createStatsWeb())).thenReturn(createStats());
         when(repo.save(createStats())).thenReturn(createStats());
         when(mapper.toWeb(createStats())).thenReturn(createStatsWeb());
-        doNothing().when(scheduler).execute(createStatsWeb());
+        doNothing().when(scheduler).execute(createStatsWeb().getId());
 
         service.execute("schambeck", "api-github");
 
         verify(loader).execute("schambeck", "api-github");
         verify(mapper).toEntity(createStatsWeb());
         verify(repo).save(createStats());
-        verify(mapper).toWeb(createStats());
-        verify(scheduler).execute(createStatsWeb());
+        verify(scheduler).execute(createStatsWeb().getId());
     }
 }

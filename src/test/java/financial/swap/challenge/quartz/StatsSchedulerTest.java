@@ -15,6 +15,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import static financial.swap.challenge.util.GithubUtil.createStatsWeb;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -35,9 +36,16 @@ class StatsSchedulerTest {
         Trigger trigger = createTrigger();
         when(scheduler.scheduleJob(job, trigger)).thenReturn(createStartAt());
 
-        statsScheduler.execute(createStatsWeb());
+        statsScheduler.execute(createStatsWeb().getId());
 
         verify(scheduler).scheduleJob(any(JobDetail.class), any(Trigger.class));
+    }
+
+    @Test
+    void executeError() throws SchedulerException {
+        when(scheduler.scheduleJob(any(), any())).thenThrow(SchedulerException.class);
+
+        assertThrows(RuntimeException.class, () -> statsScheduler.execute(null));
     }
 
     private static JobDetail createJobDetail(StatsWeb stats) {

@@ -23,6 +23,6 @@ public class StatsService {
         StatsWeb web = loader.execute(username, repository);
         Stats stats = mapper.toEntity(web);
         Stats created = repo.save(stats);
-        scheduler.execute(mapper.toWeb(created));
+        scheduler.execute(created.getId());
     }
 }
