@@ -18,10 +18,12 @@ public class AuthInterceptor implements ClientHttpRequestInterceptor {
     private String authorization;
 
     @Override
-    public @NonNull ClientHttpResponse intercept(HttpRequest request,
+    public @NonNull ClientHttpResponse intercept(@NonNull HttpRequest request,
                                                  @NonNull byte[] body,
-                                                 ClientHttpRequestExecution execution) throws IOException {
-        request.getHeaders().set(AUTHORIZATION, authorization);
+                                                 @NonNull ClientHttpRequestExecution execution) throws IOException {
+        if (authorization != null && !authorization.isBlank()) {
+            request.getHeaders().set(AUTHORIZATION, authorization);
+        }
         return execution.execute(request, body);
     }
 }
