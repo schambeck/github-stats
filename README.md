@@ -41,7 +41,7 @@ $ java -jar build/libs/github-stats-1.0.0.jar
 
 ### Webhook Site
 
-    https://webhook.site/afd6052e-5ef8-4a0a-b82f-d54ae4ed9a7b
+    https://webhook.site/#!/afd6052e-5ef8-4a0a-b82f-d54ae4ed9a7b
 
 ## Tests
 
